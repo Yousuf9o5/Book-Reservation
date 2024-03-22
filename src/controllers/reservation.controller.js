@@ -1,5 +1,5 @@
-import Reservation from "database/schemas/reservations.schema.js";
-import { error } from "src/utils/response.js";
+import Reservation from "../../database/schemas/reservations.schema.js";
+import { error, success } from "../utils/response.js";
 
 export async function GetReservation(req, res) {
   try {

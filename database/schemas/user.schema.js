@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../db.index";
-import Book from "./book.schema";
+import sequelize from "../db.index.js";
+import Book from "./book.schema.js";
 
 const User = sequelize.define(
   "User",
@@ -29,7 +29,7 @@ const User = sequelize.define(
     role: {
       type: DataTypes.ENUM("user", "admin"),
       allowNull: false,
-      defaultValue: "users",
+      defaultValue: "user",
     },
   },
   {
@@ -37,8 +37,5 @@ const User = sequelize.define(
     timestamps: false,
   }
 );
-
-// Define associations
-User.hasMany(Book, { foreignKey: "userId", as: "books" });
 
 export default User;

@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../db.index";
+import sequelize from "../db.index.js";
+import User from "./user.schema.js";
+import Book from "./book.schema.js";
 
 const Reservation = sequelize.define(
   "Reservation",
@@ -10,7 +12,7 @@ const Reservation = sequelize.define(
       autoIncrement: true,
     },
     reserve_in: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.BIGINT,
       defaultValue: Date.now() + 1000 * 60 * 60 * 24 * 7, // 7 days in case no reserve date was entered
     },
   },
@@ -21,7 +23,17 @@ const Reservation = sequelize.define(
 );
 
 // Define associations
-User.belongsToMany(Book, { through: Reservation, foreignKey: "userId" });
-Book.belongsToMany(User, { through: Reservation, foreignKey: "bookId" });
+User.belongsToMany(Book, {
+  through: Reservation,
+  foreignKey: {
+    name: "user_id",
+  },
+});
+Book.belongsToMany(User, {
+  through: Reservation,
+  foreignKey: {
+    name: "book_id",
+  },
+});
 
 export default Reservation;

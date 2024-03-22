@@ -4,8 +4,11 @@ import swaggerUi from "swagger-ui-express";
 import dotenv from "dotenv";
 import swaggerJSDoc from "swagger-jsdoc";
 import morgan from "morgan";
-import swaggerOptions from "./docs/index.js";
+import swaggerOptions from "./docs/index.docs.js";
 import { databaseConnection } from "./database/db.index.js";
+import BookRouter from "./src/routers/book.router.js";
+import UserRouter from "./src/routers/user.router.js";
+import ReservationRouter from "./src/routers/reservation.router.js";
 
 dotenv.config();
 
@@ -46,6 +49,11 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use("/public", express.static("./public"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+//routers
+app.use("/api/v1/book", BookRouter);
+app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/reservation", ReservationRouter);
 
 // Listen for connections
 app.listen(PORT, () => {

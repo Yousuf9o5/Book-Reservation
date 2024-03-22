@@ -1,5 +1,5 @@
-import Book from "database/schemas/book.schema";
-import { error } from "src/utils/response";
+import Book from "../../database/schemas/book.schema.js";
+import { error, success } from "../utils/response.js";
 
 export async function GetBooks(req, res) {
   try {

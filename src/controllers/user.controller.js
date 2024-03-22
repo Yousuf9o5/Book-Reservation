@@ -1,5 +1,5 @@
-import { error, success } from "@/src/utils/response.js";
-import User from "database/schemas/user.schema";
+import User from "../../database/schemas/user.schema.js";
+import { error, success } from "../utils/response.js";
 
 export async function GetUsers(req, res) {
   try {
