@@ -1,7 +1,7 @@
 import Reservation from "database/schemas/reservations.schema.js";
 import { error } from "src/utils/response.js";
 
-export async function name(req, res) {
+export async function GetReservation(req, res) {
   try {
     const reservations = await Reservation.findAll();
 

@@ -1,7 +1,7 @@
 import { error, success } from "@/src/utils/response.js";
 import User from "database/schemas/user.schema";
 
-export async function name(req, res) {
+export async function GetUsers(req, res) {
   try {
     const reservations = await User.findAll();
 
