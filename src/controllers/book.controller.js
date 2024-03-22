@@ -1,7 +1,7 @@
 import Book from "database/schemas/book.schema";
 import { error } from "src/utils/response";
 
-export async function name(req, res) {
+export async function GetBooks(req, res) {
   try {
     const books = await Book.findAll();
 
