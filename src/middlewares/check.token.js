@@ -1,7 +1,7 @@
-import { error } from "../utils/response.util";
+import { error } from "../utils/response.js";
 import { verify } from "jsonwebtoken";
 import dotenv from "dotenv";
-import UserModel from "../../db/models/user.model";
+import User from "../../database/schemas/user.schema.js";
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ async function checkToken(req, res, next) {
 
     if (!decodeData) throw "Not Authorized";
 
-    const user = await UserModel.findByPk(decodeData.id);
+    const user = await User.findByPk(decodeData.id);
 
     if (!user) throw "Not Authorized";
 
