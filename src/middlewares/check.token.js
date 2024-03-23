@@ -31,7 +31,7 @@ async function checkToken(req, res, next) {
 
     next();
   } catch (err) {
-    return res.status(403).json(error(403, "Not Authorized"));
+    return res.status(401).json(error(401, "Not Authorized"));
   }
 }
 
