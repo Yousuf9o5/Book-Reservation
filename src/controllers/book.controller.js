@@ -8,9 +8,11 @@ import { error, success } from "../utils/response.js";
 import express from "express";
 
 /**
- * @param {express.Request} req
- * @param {express.Response} res
- *  */
+ * Retrieves a paginated list of books.
+ * @param {express.Request} req - The request object containing query parameters for pagination.
+ * @param {express.Response} res - The response object to send the list of books.
+ * @returns {Promise<void>} A promise representing the asynchronous operation.
+ */
 export async function GetBooks(req, res) {
   try {
     const limit = +req.query.limit || 10;
@@ -26,9 +28,11 @@ export async function GetBooks(req, res) {
 }
 
 /**
- * @param {express.Request} req
- * @param {express.Response} res
- *  */
+ * Retrieves a book by its ID.
+ * @param {express.Request} req - The request object containing the book ID as a parameter.
+ * @param {express.Response} res - The response object to send the book data.
+ * @returns {Promise<void>} A promise representing the asynchronous operation.
+ */
 export async function GetBookById(req, res) {
   try {
     const book = await GetBookService(req.params.id);
@@ -44,9 +48,11 @@ export async function GetBookById(req, res) {
 }
 
 /**
- * @param {express.Request} req
- * @param {express.Response} res
- *  */
+ * Creates a new book.
+ * @param {express.Request} req - The request object containing book data in the request body.
+ * @param {express.Response} res - The response object to send the created book data.
+ * @returns {Promise<void>} A promise representing the asynchronous operation.
+ */
 export async function CreateBook(req, res) {
   try {
     const { name, description } = req.body;
@@ -70,9 +76,11 @@ export async function CreateBook(req, res) {
 }
 
 /**
- * @param {express.Request} req
- * @param {express.Response} res
- *  */
+ * Updates a book by its ID.
+ * @param {express.Request} req - The request object containing the book ID as a parameter and updated book data in the request body.
+ * @param {express.Response} res - The response object to send the updated book data.
+ * @returns {Promise<void>} A promise representing the asynchronous operation.
+ */
 export async function UpdateBookById(req, res) {
   try {
     const id = req.params.id;
@@ -98,9 +106,11 @@ export async function UpdateBookById(req, res) {
 }
 
 /**
- * @param {express.Request} req
- * @param {express.Response} res
- *  */
+ * Deletes a book by its ID.
+ * @param {express.Request} req - The request object containing the book ID as a parameter.
+ * @param {express.Response} res - The response object to send the result of the deletion operation.
+ * @returns {Promise<void>} A promise representing the asynchronous operation.
+ */
 export async function DeleteBookById(req, res) {
   try {
     const book = await GetBookService(req.params.id);
