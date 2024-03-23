@@ -17,10 +17,15 @@ import { error, success } from "../utils/response.js";
  */
 export async function GetUsers(req, res) {
   try {
-    const limit = +req.query.limit || 10;
-    const offset = (+req.query.page - 1) * limit || 1;
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit) || 10;
+    const offset = (page - 1) * limit || 1;
 
     const { users, totalPages } = await GetUsersService({ limit, offset });
+
+    if (page > totalPages) {
+      return res.status(404).json(error(404, "Reached the max paging"));
+    }
 
     return res.status(200).json(success(200, { users, totalPages }, "Done"));
   } catch (err) {
