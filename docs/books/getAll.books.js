@@ -23,6 +23,14 @@ const parameters = [
     },
     description: "Limit for pagination (maximum number of items to return)",
   },
+  {
+    in: "query",
+    name: "search",
+    schema: {
+      type: "string",
+    },
+    description: "Search for book by name and description",
+  },
 ];
 
 const example = [

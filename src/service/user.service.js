@@ -1,4 +1,4 @@
-import sequelize from "sequelize";
+import sequelize, { Op } from "sequelize";
 import User from "../../database/schemas/user.schema.js";
 import bcrypt from "bcrypt";
 
@@ -7,14 +7,23 @@ import bcrypt from "bcrypt";
  * @param {{limit:number, offset:number}} options - Options for pagination (limit, offset).
  * @returns {Promise<{ users: UserAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of users and total pages.
  */
-export async function GetUsersService({ limit, offset }) {
+export async function GetUsersService({ limit, offset, search }) {
   try {
-    const count = await User.count();
+    const where = {
+      [Op.or]: [
+        { fullName: { [Op.like]: `${search}%` } },
+        { email: { [Op.like]: `${search}%` } },
+      ],
+    };
+
+    const count = await User.count({ where });
     const totalPages = Math.ceil(count / limit);
 
     const users = await User.findAll({
       limit: limit,
       offset: offset - 1,
+      where,
+      attributes: { exclude: ["password"] },
     });
 
     return { users, totalPages };

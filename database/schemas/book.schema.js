@@ -24,4 +24,8 @@ const Book = sequelize.define(
   }
 );
 
+// Book.sync({ force: false })
+//   .then(() => console.log("Done sync this Model to the DB"))
+//   .catch((err) => console.log("Error", err));
+
 export default Book;

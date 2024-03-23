@@ -18,8 +18,13 @@ export async function GetBooks(req, res) {
     const page = Number(req.query.page);
     const limit = Number(req.query.limit) || 10;
     const offset = (page - 1) * limit || 1;
+    const search = req.query.search || "";
 
-    const { books, totalPages } = await GetBooksService({ limit, offset });
+    const { books, totalPages } = await GetBooksService({
+      limit,
+      offset,
+      search,
+    });
 
     if (page > totalPages) {
       return res.status(404).json(error(404, "Reached the max paging"));

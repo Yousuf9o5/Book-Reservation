@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Book from "../../database/schemas/book.schema.js";
 
 /**
@@ -5,14 +6,24 @@ import Book from "../../database/schemas/book.schema.js";
  * @param {Object} options - Options for pagination (limit, offset).
  * @returns {Promise<{ books: BookAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of books and total pages.
  */
-export async function GetBooksService({ limit, offset }) {
+export async function GetBooksService({ limit, offset, search }) {
   try {
-    const count = await Book.count();
+    const where = {
+      [Op.or]: [
+        { name: { [Op.like]: `${search}%` } },
+        { description: { [Op.like]: `${search}%` } },
+      ],
+    };
+
+    const count = await Book.count({
+      where,
+    });
     const totalPages = Math.ceil(count / limit + 1);
 
     const books = await Book.findAll({
       limit: limit,
       offset: offset - 1,
+      where,
     });
 
     return { books, totalPages };

@@ -7,12 +7,13 @@ import {
   UpdateUserById,
 } from "../controllers/user.controller.js";
 import isAdmin from "../middlewares/is.admin.js";
+import isValidPassword from "../middlewares/is.valid.password.js";
 
 const UserRouter = Router();
 
 UserRouter.get("/", isAdmin, GetUsers);
 UserRouter.get("/:id", isAdmin, GetUserById);
-UserRouter.post("/create", isAdmin, CreateUser);
+UserRouter.post("/create", [isAdmin, isValidPassword], CreateUser);
 UserRouter.put("/update/:id", isAdmin, UpdateUserById);
 UserRouter.delete("/delete/:id", isAdmin, DeleteUserById);
 

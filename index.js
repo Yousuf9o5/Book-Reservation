@@ -53,7 +53,7 @@ app.use("/public", express.static("./public"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //routers
-app.use("/api/v1/book", checkToken, BookRouter);
+app.use("/api/v1/book", BookRouter);
 app.use("/api/v1/user", checkToken, UserRouter);
 app.use("/api/v1/reservation", ReservationRouter);
 app.use("/api/v1/auth", AuthRouter);

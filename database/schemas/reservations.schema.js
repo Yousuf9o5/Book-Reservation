@@ -15,6 +15,10 @@ const Reservation = sequelize.define(
       type: DataTypes.BIGINT,
       defaultValue: Date.now() + 1000 * 60 * 60 * 24 * 7, // 7 days in case no reserve date was entered
     },
+    is_expired: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     tableName: "reservations",
@@ -35,5 +39,9 @@ Book.belongsToMany(User, {
     name: "book_id",
   },
 });
+
+// Reservation.sync({ force: false })
+//   .then(() => console.log("Done sync this Model to the DB"))
+//   .catch((err) => console.log("Error", err));
 
 export default Reservation;

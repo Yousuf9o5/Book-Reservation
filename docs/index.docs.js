@@ -11,6 +11,7 @@ import byIdBooks from "./books/byId.books.js";
 import byIdUsers from "./users/byId.users.js";
 import signupAuth from "./auth/signup.auth.js";
 import signinAuth from "./auth/signin.auth.js";
+import changePasswordAuth from "./auth/change.password.auth.js";
 
 /** @type {swaggerJSDoc.Tag[]} */
 const tags = [
@@ -66,6 +67,7 @@ const swaggerOptions = {
 
       "/api/v1/auth/signup": signupAuth,
       "/api/v1/auth/signin": signinAuth,
+      "/api/v1/auth/change_password": changePasswordAuth,
     },
   },
   apis: [],
