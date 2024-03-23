@@ -9,6 +9,7 @@ import { databaseConnection } from "./database/db.index.js";
 import BookRouter from "./src/routers/book.router.js";
 import UserRouter from "./src/routers/user.router.js";
 import ReservationRouter from "./src/routers/reservation.router.js";
+import checkToken from "./src/middlewares/check.token.js";
 
 dotenv.config();
 
@@ -51,8 +52,8 @@ app.use("/public", express.static("./public"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //routers
-app.use("/api/v1/book", BookRouter);
-app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/book", checkToken, BookRouter);
+app.use("/api/v1/user", checkToken, UserRouter);
 app.use("/api/v1/reservation", ReservationRouter);
 
 // Listen for connections

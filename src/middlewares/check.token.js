@@ -1,5 +1,5 @@
 import { error } from "../utils/response.js";
-import { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import User from "../../database/schemas/user.schema.js";
 import express from "express";
@@ -21,7 +21,7 @@ async function checkToken(req, res, next) {
 
     if (!token) throw "Not Authorized";
 
-    const decodeData = verify(token, secretKey);
+    const decodeData = jwt.verify(token, secretKey);
 
     if (!decodeData) throw "Not Authorized";
 
