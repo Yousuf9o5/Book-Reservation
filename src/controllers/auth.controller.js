@@ -1,10 +1,11 @@
 import express from "express";
-import { error } from "../utils/response";
+import { error, success } from "../utils/response.js";
 import {
   CreateUserService,
   GetUserByFieldsService,
-} from "../service/user.service";
-import { sign } from "jsonwebtoken";
+} from "../service/user.service.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const secretKey = process.env.SECRET_KEY;
 
@@ -27,14 +28,13 @@ export async function Signup(req, res) {
 
     const user = await CreateUserService(req.body);
 
-    console.log(user.getAttributes("id"));
-
-    // const jwt = sign({ id: user.getAttributes("id") }, secretKey);
+    const token = jwt.sign({ id: user.getDataValue("id") }, secretKey);
 
     return res
       .status(201)
-      .json(success(201, null, "User signed up successfully"));
+      .json(success(201, { token }, "User signed up successfully"));
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }
@@ -47,7 +47,35 @@ export async function Signup(req, res) {
  */
 export async function Signin(req, res) {
   try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      const msg =
+        "Invalid input data. Missing required fields or invalid format.";
+      return res.status(400).json(error(400, msg, null));
+    }
+
+    const user = await GetUserByFieldsService({ email });
+
+    if (!user) {
+      const msg = "User Not Found";
+      return res.status(404).json(error(404, msg, null));
+    }
+
+    const canPass = await bcrypt.compare(password, user.password);
+
+    if (!canPass) {
+      const msg = "Invalid password";
+      return res.status(403).json(error(403, msg, null));
+    }
+
+    const token = jwt.sign({ id: user.id }, secretKey);
+
+    return res
+      .status(201)
+      .json(success(201, { token: token }, "User signed up successfully"));
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }

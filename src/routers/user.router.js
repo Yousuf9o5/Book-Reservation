@@ -6,13 +6,14 @@ import {
   GetUsers,
   UpdateUserById,
 } from "../controllers/user.controller.js";
+import isAdmin from "../middlewares/is.admin.js";
 
 const UserRouter = Router();
 
-UserRouter.get("/", GetUsers);
-UserRouter.get("/:id", GetUserById);
-UserRouter.post("/create", CreateUser);
-UserRouter.put("/update/:id", UpdateUserById);
-UserRouter.delete("/delete/:id", DeleteUserById);
+UserRouter.get("/", isAdmin, GetUsers);
+UserRouter.get("/:id", isAdmin, GetUserById);
+UserRouter.post("/create", isAdmin, CreateUser);
+UserRouter.put("/update/:id", isAdmin, UpdateUserById);
+UserRouter.delete("/delete/:id", isAdmin, DeleteUserById);
 
 export default UserRouter;

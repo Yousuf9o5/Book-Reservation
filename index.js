@@ -10,6 +10,7 @@ import BookRouter from "./src/routers/book.router.js";
 import UserRouter from "./src/routers/user.router.js";
 import ReservationRouter from "./src/routers/reservation.router.js";
 import checkToken from "./src/middlewares/check.token.js";
+import AuthRouter from "./src/routers/auth.router.js";
 
 dotenv.config();
 
@@ -55,6 +56,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/v1/book", checkToken, BookRouter);
 app.use("/api/v1/user", checkToken, UserRouter);
 app.use("/api/v1/reservation", ReservationRouter);
+app.use("/api/v1/auth", AuthRouter);
 
 // Listen for connections
 app.listen(PORT, () => {

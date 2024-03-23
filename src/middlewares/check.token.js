@@ -29,6 +29,8 @@ async function checkToken(req, res, next) {
 
     if (!user) throw "Not Authorized";
 
+    req.userId = user.getDataValue("id");
+
     next();
   } catch (err) {
     return res.status(401).json(error(401, "Not Authorized"));

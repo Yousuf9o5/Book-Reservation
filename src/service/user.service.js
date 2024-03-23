@@ -1,5 +1,6 @@
 import sequelize from "sequelize";
 import User from "../../database/schemas/user.schema.js";
+import bcrypt from "bcrypt";
 
 /**
  * Retrieves paginated list of users.
@@ -43,7 +44,11 @@ export async function GetUserByIdService(id) {
  */
 export async function GetUserByFieldsService(fields) {
   try {
-    return await User.findOne({ where: { ...fields } });
+    const user = await User.findOne({ where: { ...fields } });
+
+    if (!user) return null;
+
+    return await user.get();
   } catch (error) {
     throw new Error(`Failed to retrieve user with ID ${id}: ${error.message}`);
   }
@@ -56,7 +61,9 @@ export async function GetUserByFieldsService(fields) {
  */
 export async function CreateUserService(userData) {
   try {
-    return await User.create({ ...userData });
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+    return await User.create({ ...userData, password: hashedPassword });
   } catch (error) {
     throw new Error(`Failed to create user: ${error.message}`);
   }
