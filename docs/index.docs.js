@@ -9,6 +9,8 @@ import updateUsers from "./users/update.users.js";
 import deleteUsers from "./users/delete.users.js";
 import byIdBooks from "./books/byId.books.js";
 import byIdUsers from "./users/byId.users.js";
+import signupAuth from "./auth/signup.auth.js";
+import signinAuth from "./auth/signin.auth.js";
 
 /** @type {swaggerJSDoc.Tag[]} */
 const tags = [
@@ -61,6 +63,9 @@ const swaggerOptions = {
       "/api/v1/user/create": createUsers,
       "/api/v1/user/update/{id}": updateUsers,
       "/api/v1/user/delete/{id}": deleteUsers,
+
+      "/api/v1/auth/signup": signupAuth,
+      "/api/v1/auth/signin": signinAuth,
     },
   },
   apis: [],

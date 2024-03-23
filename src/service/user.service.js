@@ -1,3 +1,4 @@
+import sequelize from "sequelize";
 import User from "../../database/schemas/user.schema.js";
 
 /**
@@ -24,7 +25,7 @@ export async function GetUsersService({ limit, offset }) {
 /**
  * Retrieves a user by their ID.
  * @param {number | string} id - The ID of the user to retrieve.
- * @returns {Promise<Object | null>} A promise that resolves to the user object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model | null>} A promise that resolves to the user object if found, or null otherwise.
  */
 export async function GetUserByIdService(id) {
   try {
@@ -37,7 +38,7 @@ export async function GetUserByIdService(id) {
 /**
  * Retrieves a user based on provided fields.
  * @param {Object} fields - The fields to match for user retrieval.
- * @returns {Promise<Object | null>} A promise that resolves to the user object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model | null>} A promise that resolves to the user object if found, or null otherwise.
  * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetUserByFieldsService(fields) {
@@ -51,7 +52,7 @@ export async function GetUserByFieldsService(fields) {
 /**
  * Creates a new user.
  * @param {Object} userData - Data of the user to be created (fullName, email, password, role).
- * @returns {Promise<Object>} A promise that resolves to the created user object.
+ * @returns {Promise<sequelize.Model>} A promise that resolves to the created user object.
  */
 export async function CreateUserService(userData) {
   try {
@@ -65,7 +66,7 @@ export async function CreateUserService(userData) {
  * Updates a user by their ID.
  * @param {number} id - The ID of the user to update.
  * @param {Object} newData - New data to update the user with (fullName, email, password, role).
- * @returns {Promise<Object | null>} A promise that resolves to the updated user object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model>} A promise that resolves to the updated user object if found, or null otherwise.
  */
 export async function UpdateUserByIdService(id, newData) {
   try {

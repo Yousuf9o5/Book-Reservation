@@ -24,7 +24,7 @@ export async function GetBooksService({ limit, offset }) {
 /**
  * Retrieves a book by its ID.
  * @param {number | string} id - The ID of the book to retrieve.
- * @returns {Model<any, any>} A promise that resolves to the book object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model | null>} A promise that resolves to the book object if found, or null otherwise.
  */
 export async function GetBookService(id) {
   try {
@@ -37,7 +37,7 @@ export async function GetBookService(id) {
 /**
  * Creates a new book.
  * @param {Object} data - Data of the book to be created (name, description).
- * @returns {Promise<Book>} A promise that resolves to the created book object.
+ * @returns {Promise<sequelize.Model | null>} A promise that resolves to the created book object.
  */
 export async function CreateBookService({ name, description }) {
   try {
@@ -52,7 +52,7 @@ export async function CreateBookService({ name, description }) {
  * Updates a book by its ID.
  * @param {number} id - The ID of the book to update.
  * @param {Object} data - New data to update the book with (name, description).
- * @returns {Promise<Book>} A promise that resolves to the updated book object.
+ * @returns {Promise<sequelize.Model | null>} A promise that resolves to the updated book object.
  */
 export async function UpdateBookService(id, newData) {
   try {
