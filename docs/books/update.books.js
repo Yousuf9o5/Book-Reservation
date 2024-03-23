@@ -12,7 +12,6 @@ const parameters = [
   },
 ];
 
-/** @type {swaggerJSDoc.RequestBody} */
 const requestBody = {
   description: "Book object to be updated",
   content: {
@@ -28,10 +27,6 @@ const requestBody = {
             type: "string",
             example: "Description of the book",
           },
-          description: {
-            type: "string",
-            example: "Description of the book",
-          },
         },
         required: ["name", "description"],
       },
@@ -39,30 +34,35 @@ const requestBody = {
   },
 };
 
+const example = {
+  book_id: 1,
+  name: "Book Title Generic Fresh Tuna",
+  description:
+    "Veritatis perferendis consequatur dolores qui ipsum nulla dolores quis. Ea laudantium et natus asperiores placeat voluptatem. Ea facere aut dolorum omnis quis velit. Quos aut quia illum rerum eum magnam mollitia cum numquam.",
+  createdAt: "2024-03-22T23:29:22.000Z",
+  updatedAt: "2024-03-22T23:29:22.000Z",
+};
+
 const responses = {
   200: {
-    description: "User Updated successfully",
+    description: "Book Updated successfully",
     content: {
       "application/json": {
-        example: {
-          id: 1,
-          fullName: "Abbas",
-          email: "Abbas@email.com",
-          password: "password",
-          role: "user",
-        },
+        example: example,
       },
     },
   },
+  304: {
+    description: "No Fields Where Entered",
+  },
   400: {
-    description: "Failed to update user. Please check your input.",
+    description: "Bad Request: You must enter the ID of the book.",
   },
 };
 
-/** @type {swaggerJSDoc.PathItem} */
 export default {
   put: {
-    summary: "Update book by id",
+    summary: "Update book by ID",
     tags: ["books"],
     parameters,
     requestBody,
