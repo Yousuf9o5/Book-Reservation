@@ -55,7 +55,7 @@ const responses = {
 export default {
   post: {
     summary: "Create a new book",
-    tags: ["users"],
+    tags: ["Users"],
     parameters: [],
     requestBody,
     responses,

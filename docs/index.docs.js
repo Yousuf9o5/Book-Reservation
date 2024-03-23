@@ -13,15 +13,19 @@ import byIdUsers from "./users/byId.users.js";
 /** @type {swaggerJSDoc.Tag[]} */
 const tags = [
   {
-    name: "users",
+    name: "Auth",
+    description: "Auth API",
+  },
+  {
+    name: "Users",
     description: "CRUD API for user",
   },
   {
-    name: "books",
+    name: "Books",
     description: "CRUD API for books",
   },
   {
-    name: "reservations",
+    name: "Reservations",
     description: "CRUD API for reservations",
   },
 ];

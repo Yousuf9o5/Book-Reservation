@@ -40,7 +40,7 @@ const responses = {
 export default {
   get: {
     summary: "Get book by id",
-    tags: ["books"],
+    tags: ["Books"],
     parameters,
     responses,
   },

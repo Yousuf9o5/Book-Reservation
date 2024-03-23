@@ -58,7 +58,7 @@ const responses = {
 export default {
   get: {
     summary: "Get all users",
-    tags: ["users"],
+    tags: ["Users"],
     parameters: parameters,
     responses: responses,
   },

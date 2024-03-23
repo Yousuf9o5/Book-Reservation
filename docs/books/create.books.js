@@ -46,7 +46,7 @@ const responses = {
 export default {
   post: {
     summary: "Create a new book",
-    tags: ["books"],
+    tags: ["Books"],
     parameters: [],
     requestBody,
     responses,

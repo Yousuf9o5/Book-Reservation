@@ -25,7 +25,7 @@ const responses = {
 export default {
   delete: {
     summary: "Delete book by id",
-    tags: ["books"],
+    tags: ["Books"],
     parameters,
     responses,
   },

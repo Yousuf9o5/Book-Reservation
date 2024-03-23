@@ -68,7 +68,7 @@ const responses = {
 export default {
   put: {
     summary: "Update book by id",
-    tags: ["users"],
+    tags: ["Users"],
     parameters,
     requestBody,
     responses,

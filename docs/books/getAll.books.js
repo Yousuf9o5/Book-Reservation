@@ -60,7 +60,7 @@ const responses = {
 export default {
   get: {
     summary: "Get all books",
-    tags: ["books"],
+    tags: ["Books"],
     parameters: parameters,
     responses: responses,
   },

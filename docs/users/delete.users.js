@@ -25,7 +25,7 @@ const responses = {
 export default {
   delete: {
     summary: "Delete user by id",
-    tags: ["users"],
+    tags: ["Users"],
     parameters,
     responses,
   },
