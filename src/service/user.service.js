@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 /**
  * Retrieves paginated list of users.
  * @param {{limit:number, offset:number}} options - Options for pagination (limit, offset).
- * @returns {Promise<{ users: Object[], totalPages: number }>} A promise that resolves to an object containing the list of users and total pages.
+ * @returns {Promise<{ users: UserAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of users and total pages.
  */
 export async function GetUsersService({ limit, offset }) {
   try {
@@ -26,11 +26,15 @@ export async function GetUsersService({ limit, offset }) {
 /**
  * Retrieves a user by their ID.
  * @param {number | string} id - The ID of the user to retrieve.
- * @returns {Promise<sequelize.Model | null>} A promise that resolves to the user object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model<UserAttributes> | null>} A promise that resolves to the user object if found, or null otherwise.
  */
 export async function GetUserByIdService(id) {
   try {
-    return await User.findByPk(id);
+    const user = await User.findByPk(id);
+
+    if (!user) return null;
+
+    return user.get();
   } catch (error) {
     throw new Error(`Failed to retrieve user with ID ${id}: ${error.message}`);
   }
@@ -39,7 +43,7 @@ export async function GetUserByIdService(id) {
 /**
  * Retrieves a user based on provided fields.
  * @param {Object} fields - The fields to match for user retrieval.
- * @returns {Promise<sequelize.Model | null>} A promise that resolves to the user object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model<UserAttributes> | null>} A promise that resolves to the user object if found, or null otherwise.
  * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetUserByFieldsService(fields) {
@@ -57,7 +61,7 @@ export async function GetUserByFieldsService(fields) {
 /**
  * Creates a new user.
  * @param {Object} userData - Data of the user to be created (fullName, email, password, role).
- * @returns {Promise<sequelize.Model>} A promise that resolves to the created user object.
+ * @returns {Promise<sequelize.Model<UserAttributes>>} A promise that resolves to the created user object.
  */
 export async function CreateUserService(userData) {
   try {
@@ -73,7 +77,7 @@ export async function CreateUserService(userData) {
  * Updates a user by their ID.
  * @param {number} id - The ID of the user to update.
  * @param {Object} newData - New data to update the user with (fullName, email, password, role).
- * @returns {Promise<sequelize.Model>} A promise that resolves to the updated user object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model<UserAttributes>>} A promise that resolves to the updated user object if found, or null otherwise.
  */
 export async function UpdateUserByIdService(id, newData) {
   try {
@@ -88,7 +92,8 @@ export async function UpdateUserByIdService(id, newData) {
       user.set("email", email);
     }
     if (password) {
-      user.set("password", password);
+      const hashedPass = await bcrypt.hash(password, 10);
+      user.set("password", hashedPass);
     }
     if (role) {
       user.set("role", role);

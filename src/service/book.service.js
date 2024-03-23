@@ -3,7 +3,7 @@ import Book from "../../database/schemas/book.schema.js";
 /**
  * Retrieves paginated list of books.
  * @param {Object} options - Options for pagination (limit, offset).
- * @returns {Promise<{ books: Book[], totalPages: number }>} A promise that resolves to an object containing the list of books and total pages.
+ * @returns {Promise<{ books: BookAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of books and total pages.
  */
 export async function GetBooksService({ limit, offset }) {
   try {
@@ -24,11 +24,15 @@ export async function GetBooksService({ limit, offset }) {
 /**
  * Retrieves a book by its ID.
  * @param {number | string} id - The ID of the book to retrieve.
- * @returns {Promise<sequelize.Model | null>} A promise that resolves to the book object if found, or null otherwise.
+ * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the book object if found, or null otherwise.
  */
 export async function GetBookService(id) {
   try {
-    return await Book.findByPk(id);
+    const book = await Book.findByPk(id);
+
+    if (!book) return null;
+
+    return book.get();
   } catch (error) {
     throw new Error(`Failed to retrieve book with ID ${id}: ${error.message}`);
   }
@@ -37,7 +41,7 @@ export async function GetBookService(id) {
 /**
  * Creates a new book.
  * @param {Object} data - Data of the book to be created (name, description).
- * @returns {Promise<sequelize.Model | null>} A promise that resolves to the created book object.
+ * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the created book object.
  */
 export async function CreateBookService({ name, description }) {
   try {
@@ -52,7 +56,7 @@ export async function CreateBookService({ name, description }) {
  * Updates a book by its ID.
  * @param {number} id - The ID of the book to update.
  * @param {Object} data - New data to update the book with (name, description).
- * @returns {Promise<sequelize.Model | null>} A promise that resolves to the updated book object.
+ * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the updated book object.
  */
 export async function UpdateBookService(id, newData) {
   try {
