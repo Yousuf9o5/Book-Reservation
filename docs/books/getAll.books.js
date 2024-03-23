@@ -54,6 +54,9 @@ const responses = {
       },
     },
   },
+  500: {
+    description: "Internal server error. Failed to process the request.",
+  },
 };
 
 /** @type {swaggerJSDoc.PathItem} */

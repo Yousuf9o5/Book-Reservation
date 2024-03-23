@@ -58,6 +58,9 @@ const responses = {
   400: {
     description: "Bad Request: You must enter the ID of the book.",
   },
+  500: {
+    description: "Internal server error. Failed to process the request.",
+  },
 };
 
 export default {

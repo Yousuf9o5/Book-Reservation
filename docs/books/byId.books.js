@@ -34,6 +34,9 @@ const responses = {
   404: {
     description: "Not found",
   },
+  500: {
+    description: "Internal server error. Failed to process the request.",
+  },
 };
 
 /** @type {swaggerJSDoc.PathItem} */
