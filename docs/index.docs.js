@@ -12,6 +12,12 @@ import byIdUsers from "./users/byId.users.js";
 import signupAuth from "./auth/signup.auth.js";
 import signinAuth from "./auth/signin.auth.js";
 import changePasswordAuth from "./auth/change.password.auth.js";
+import getAllReservation from "./reservations/getAll.reservation.js";
+import createReservation from "./reservations/create.reservation.js";
+import getMyReservation from "./reservations/getMy.reservation.js";
+import usersSchema from "./users/users.schema.js";
+import booksSchema from "./books/books.schema.js";
+import reservationsSchema from "./reservations/reservations.schema.js";
 
 /** @type {swaggerJSDoc.Tag[]} */
 const tags = [
@@ -41,6 +47,11 @@ const swaggerOptions = {
       securitySchemes: {
         bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "JWT" },
       },
+      schemas: {
+        User: usersSchema,
+        Book: booksSchema,
+        Reservation: reservationsSchema,
+      },
     },
     security: [{ bearerAuth: [] }],
     info: {
@@ -68,6 +79,10 @@ const swaggerOptions = {
       "/api/v1/auth/signup": signupAuth,
       "/api/v1/auth/signin": signinAuth,
       "/api/v1/auth/change_password": changePasswordAuth,
+
+      "/api/v1/reservation": getAllReservation,
+      "/api/v1/reservation/my_reservations": getMyReservation,
+      "/api/v1/reservation/create": createReservation,
     },
   },
   apis: [],

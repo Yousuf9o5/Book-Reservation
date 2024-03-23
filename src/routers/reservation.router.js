@@ -1,8 +1,20 @@
 import { Router } from "express";
-import { GetReservation } from "../controllers/reservation.controller.js";
+import {
+  GetMyReservation,
+  GetReservation,
+  ReserveBook,
+} from "../controllers/reservation.controller.js";
+import checkToken from "../middlewares/check.token.js";
+import isAdmin from "../middlewares/is.admin.js";
 
 const ReservationRouter = Router();
 
 ReservationRouter.get("/", GetReservation);
+ReservationRouter.get(
+  "/my_reservations",
+  [checkToken, isAdmin],
+  GetMyReservation
+);
+ReservationRouter.post("/create", checkToken, ReserveBook);
 
 export default ReservationRouter;

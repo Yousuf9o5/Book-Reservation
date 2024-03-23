@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 /**
  * Retrieves paginated list of users.
- * @param {{limit:number, offset:number}} options - Options for pagination (limit, offset).
+ * @param {GetOptions} options - Options for pagination (limit, offset).
  * @returns {Promise<{ users: UserAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of users and total pages.
  */
 export async function GetUsersService({ limit, offset, search }) {
@@ -16,15 +16,13 @@ export async function GetUsersService({ limit, offset, search }) {
       ],
     };
 
-    const count = await User.count({ where });
-    const totalPages = Math.ceil(count / limit);
-
-    const users = await User.findAll({
+    const { count, rows: users } = await User.findAndCountAll({
       limit: limit,
       offset: offset - 1,
       where,
-      attributes: { exclude: ["password"] },
     });
+
+    const totalPages = Math.ceil(count / limit);
 
     return { users, totalPages };
   } catch (error) {
@@ -39,11 +37,7 @@ export async function GetUsersService({ limit, offset, search }) {
  */
 export async function GetUserByIdService(id) {
   try {
-    const user = await User.findByPk(id);
-
-    if (!user) return null;
-
-    return user.get();
+    return await User.findByPk(id);
   } catch (error) {
     throw new Error(`Failed to retrieve user with ID ${id}: ${error.message}`);
   }
@@ -51,7 +45,7 @@ export async function GetUserByIdService(id) {
 
 /**
  * Retrieves a user based on provided fields.
- * @param {Object} fields - The fields to match for user retrieval.
+ * @param {UserAttributes} fields - The fields to match for user retrieval.
  * @returns {Promise<sequelize.Model<UserAttributes> | null>} A promise that resolves to the user object if found, or null otherwise.
  * @throws {Error} Throws an error if the retrieval process fails.
  */

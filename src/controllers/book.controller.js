@@ -26,13 +26,8 @@ export async function GetBooks(req, res) {
       search,
     });
 
-    if (page > totalPages) {
-      return res.status(404).json(error(404, "Reached the max paging"));
-    }
-
     return res.status(200).json(success(200, { books, totalPages }, "Done"));
   } catch (err) {
-    console.log(err);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }

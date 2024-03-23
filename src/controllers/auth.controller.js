@@ -35,7 +35,6 @@ export async function Signup(req, res) {
       .status(201)
       .json(success(201, { token }, "User signed up successfully"));
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }
@@ -76,7 +75,6 @@ export async function Signin(req, res) {
       .status(201)
       .json(success(201, { token: token }, "User signed up successfully"));
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }
@@ -117,7 +115,6 @@ export async function ChangePassword(req, res) {
       .status(200)
       .json(success(200, null, "Password Updated Successfully"));
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }

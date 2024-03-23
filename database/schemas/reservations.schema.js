@@ -11,13 +11,9 @@ const Reservation = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    reserve_in: {
-      type: DataTypes.BIGINT,
-      defaultValue: Date.now() + 1000 * 60 * 60 * 24 * 7, // 7 days in case no reserve date was entered
-    },
-    is_expired: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+    reserve_end_on: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
   },
   {
@@ -29,18 +25,19 @@ const Reservation = sequelize.define(
 // Define associations
 User.belongsToMany(Book, {
   through: Reservation,
-  foreignKey: {
-    name: "user_id",
-  },
+  foreignKey: "user_id",
+  as: "user",
 });
 Book.belongsToMany(User, {
   through: Reservation,
-  foreignKey: {
-    name: "book_id",
-  },
+  foreignKey: "book_id",
+  as: "book",
 });
 
-// Reservation.sync({ force: false })
+Reservation.belongsTo(User, { foreignKey: "user_id", as: "user" });
+Reservation.belongsTo(Book, { foreignKey: "book_id", as: "book" });
+
+// Reservation.sync({ force: true })
 //   .then(() => console.log("Done sync this Model to the DB"))
 //   .catch((err) => console.log("Error", err));
 

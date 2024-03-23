@@ -3,7 +3,7 @@ import Book from "../../database/schemas/book.schema.js";
 
 /**
  * Retrieves paginated list of books.
- * @param {Object} options - Options for pagination (limit, offset).
+ * @param {GetOptions} options - Options for pagination (limit, offset).
  * @returns {Promise<{ books: BookAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of books and total pages.
  */
 export async function GetBooksService({ limit, offset, search }) {
@@ -15,16 +15,13 @@ export async function GetBooksService({ limit, offset, search }) {
       ],
     };
 
-    const count = await Book.count({
-      where,
-    });
-    const totalPages = Math.ceil(count / limit + 1);
-
-    const books = await Book.findAll({
+    const { count, rows: books } = await Book.findAndCountAll({
       limit: limit,
       offset: offset - 1,
       where,
     });
+
+    const totalPages = Math.round(count / limit);
 
     return { books, totalPages };
   } catch (error) {
@@ -39,19 +36,28 @@ export async function GetBooksService({ limit, offset, search }) {
  */
 export async function GetBookService(id) {
   try {
-    const book = await Book.findByPk(id);
-
-    if (!book) return null;
-
-    return book.get();
+    return await Book.findByPk(id);
   } catch (error) {
     throw new Error(`Failed to retrieve book with ID ${id}: ${error.message}`);
   }
 }
 
 /**
+ * Retrieves a book based on the provided fields.
+ * @param {BookAttributes} fields - The fields to match when retrieving the book.
+ * @returns {Promise<BookAttributes | null>} A promise that resolves to the book object if found, or null otherwise.
+ */
+export async function GetBookByFieldsService(fields) {
+  try {
+    return await Book.findOne({ where: { ...fields } });
+  } catch (error) {
+    throw new Error(`Failed to retrieve: ${error.message}`);
+  }
+}
+
+/**
  * Creates a new book.
- * @param {Object} data - Data of the book to be created (name, description).
+ * @param {BookAttributes} data - Data of the book to be created (name, description).
  * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the created book object.
  */
 export async function CreateBookService({ name, description }) {
@@ -66,7 +72,7 @@ export async function CreateBookService({ name, description }) {
 /**
  * Updates a book by its ID.
  * @param {number} id - The ID of the book to update.
- * @param {Object} data - New data to update the book with (name, description).
+ * @param {BookAttributes} data - New data to update the book with (name, description).
  * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the updated book object.
  */
 export async function UpdateBookService(id, newData) {

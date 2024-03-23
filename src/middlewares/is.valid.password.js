@@ -23,7 +23,6 @@ async function isValidPassword(req, res, next) {
 
     next();
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }

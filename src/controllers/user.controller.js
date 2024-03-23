@@ -30,7 +30,6 @@ export async function GetUsers(req, res) {
 
     return res.status(200).json(success(200, { users, totalPages }, "Done"));
   } catch (err) {
-    console.log(err);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }
@@ -46,7 +45,7 @@ export async function GetUserById(req, res) {
     const user = await GetUserByIdService(req.params.id);
 
     if (!user) {
-      return res.status(404).json(error(404, user, "User Not Found"));
+      return res.status(404).json(error(404, "User Not Found", user));
     }
 
     return res.status(200).json(success(200, user, "User Found"));
@@ -102,10 +101,18 @@ export async function UpdateUserById(req, res) {
       return res.status(400).json(error(400, msg, null));
     }
 
+    const isExists = await GetUserByFieldsService({
+      email: req.body.email,
+    });
+
+    if (isExists) {
+      return res.status(400).json(error(400, "email is already in use"));
+    }
+
     const user = await UpdateUserByIdService(id, req.body);
 
     if (!user) {
-      return res.status(404).json(error(404, user, "User Not Found"));
+      return res.status(404).json(error(404, "User Not Found", user));
     }
 
     return res
@@ -127,7 +134,7 @@ export async function DeleteUserById(req, res) {
     const user = await GetUserByIdService(req.params.id);
 
     if (!user) {
-      return res.status(404).json(error(404, user, "User Not Found"));
+      return res.status(404).json(error(404, "User Not Found", user));
     }
 
     const deleted = await DeleteUserByIdService(req.params.id);
