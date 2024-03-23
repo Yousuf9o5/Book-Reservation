@@ -19,7 +19,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions);
 const PORT = process.env.PORT || 3001;
 
 //setup connection
-databaseConnection(true)
+databaseConnection(false)
   .then(() => {
     console.log("Database connected successfully");
   })
