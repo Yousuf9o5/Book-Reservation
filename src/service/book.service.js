@@ -7,7 +7,7 @@ import Book from "../../database/schemas/book.schema.js";
  */
 export async function GetBooksService({ limit, offset }) {
   try {
-    const { count } = await Book.findAndCountAll();
+    const count = await Book.count();
     const totalPages = Math.ceil(count / limit);
 
     const books = await Book.findAll({

@@ -7,7 +7,7 @@ import User from "../../database/schemas/user.schema.js";
  */
 export async function GetUsersService({ limit, offset }) {
   try {
-    const { count } = await User.findAndCountAll();
+    const count = await User.count();
     const totalPages = Math.ceil(count / limit);
 
     const users = await User.findAll({
