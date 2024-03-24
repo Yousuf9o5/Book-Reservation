@@ -57,7 +57,7 @@ const responses = {
 /** @type {swaggerJSDoc.PathItem} */
 export default {
   post: {
-    summary: "Create a new book",
+    summary: "Create a new user",
     tags: ["Users"],
     parameters: [],
     requestBody,

@@ -38,7 +38,7 @@ const responses = {
 /** @type {swaggerJSDoc.PathItem} */
 export default {
   get: {
-    summary: "Get book by id",
+    summary: "Get user by id",
     tags: ["Users"],
     parameters,
     responses,

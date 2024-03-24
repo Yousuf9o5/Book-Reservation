@@ -70,7 +70,7 @@ const responses = {
 /** @type {swaggerJSDoc.PathItem} */
 export default {
   put: {
-    summary: "Update book by id",
+    summary: "Update user by id",
     tags: ["Users"],
     parameters,
     requestBody,
