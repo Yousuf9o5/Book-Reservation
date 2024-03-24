@@ -40,7 +40,6 @@ const corsOptions = {
 };
 
 app.get("/", (req, res) => {
-  // res.redirect("/public/index.html");
   res.send("server is running");
 });
 
