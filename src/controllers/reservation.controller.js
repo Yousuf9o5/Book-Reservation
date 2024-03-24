@@ -13,7 +13,7 @@ import express from "express";
  * Retrieves reservations based on specified query parameters.
  * @param {express.Request} req - The request object containing query parameters for filtering and pagination.
  * @param {express.Response} res - The response object to send the list of reservations.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function GetReservation(req, res) {
   try {
@@ -41,7 +41,7 @@ export async function GetReservation(req, res) {
  * Retrieves reservations made by the authenticated user.
  * @param {express.Request} req - The request object containing query parameters for filtering and pagination.
  * @param {express.Response} res - The response object to send the list of reservations.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function GetMyReservation(req, res) {
   try {
@@ -69,7 +69,7 @@ export async function GetMyReservation(req, res) {
  * Reserves a book for the authenticated user.
  * @param {express.Request} req - The request object containing user ID and book ID to reserve.
  * @param {express.Response} res - The response object to send the result of the reservation operation.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function ReserveBook(req, res) {
   try {

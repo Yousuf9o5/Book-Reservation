@@ -1,5 +1,6 @@
 import { Op } from "sequelize";
 import Book from "../../database/schemas/book.schema.js";
+import sequelize from "sequelize";
 
 /**
  * Retrieves paginated list of books.

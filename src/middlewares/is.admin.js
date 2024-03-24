@@ -7,7 +7,7 @@ import { error } from "../utils/response.js";
  * @param {express.Request} req - The request object.
  * @param {express.Response} res - The response object.
  * @param {express.NextFunction} next - The next function to call in the middleware chain.
- * @returns {void}
+ * @returns {Promise<void | express.Response<any, Record<string, any>>>}
  */
 async function isAdmin(req, res, next) {
   try {

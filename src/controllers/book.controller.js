@@ -36,7 +36,7 @@ export async function GetBooks(req, res) {
  * Retrieves a book by its ID.
  * @param {express.Request} req - The request object containing the book ID as a parameter.
  * @param {express.Response} res - The response object to send the book data.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function GetBookById(req, res) {
   try {
@@ -56,7 +56,7 @@ export async function GetBookById(req, res) {
  * Creates a new book.
  * @param {express.Request} req - The request object containing book data in the request body.
  * @param {express.Response} res - The response object to send the created book data.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function CreateBook(req, res) {
   try {
@@ -84,7 +84,7 @@ export async function CreateBook(req, res) {
  * Updates a book by its ID.
  * @param {express.Request} req - The request object containing the book ID as a parameter and updated book data in the request body.
  * @param {express.Response} res - The response object to send the updated book data.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function UpdateBookById(req, res) {
   try {
@@ -114,7 +114,7 @@ export async function UpdateBookById(req, res) {
  * Deletes a book by its ID.
  * @param {express.Request} req - The request object containing the book ID as a parameter.
  * @param {express.Response} res - The response object to send the result of the deletion operation.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function DeleteBookById(req, res) {
   try {

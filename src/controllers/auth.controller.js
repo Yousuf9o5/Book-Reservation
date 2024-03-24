@@ -14,7 +14,7 @@ const secretKey = process.env.SECRET_KEY;
  * Handles user signup.
  * @param {express.Request} req - The request object containing user signup data.
  * @param {express.Response} res - The response object to send the result of the signup operation.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function Signup(req, res) {
   try {
@@ -43,7 +43,7 @@ export async function Signup(req, res) {
  * Handles user signin.
  * @param {express.Request} req - The request object containing user signin data.
  * @param {express.Response} res - The response object to send the result of the signin operation.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function Signin(req, res) {
   try {
@@ -83,7 +83,7 @@ export async function Signin(req, res) {
  * Updates the password of the current user.
  * @param {express.Request} req - The request object containing the current user's ID and the old and new passwords.
  * @param {express.Response} res - The response object to send the result of the password change operation.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function ChangePassword(req, res) {
   try {

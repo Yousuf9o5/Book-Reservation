@@ -7,7 +7,7 @@ import express from "express";
  * @param {express.Request} req - The request object containing the password or new password to validate.
  * @param {express.Response} res - The response object to send the result of the password validation.
  * @param {express.NextFunction} next - The next middleware function in the request-response cycle.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<void | express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 async function isValidPassword(req, res, next) {
   try {

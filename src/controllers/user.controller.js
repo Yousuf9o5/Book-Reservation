@@ -13,7 +13,7 @@ import { error, success } from "../utils/response.js";
  * Retrieves a paginated list of users.
  * @param {express.Request} req - The request object containing query parameters for pagination.
  * @param {express.Response} res - The response object to send the list of users.
- * @returns {Promise<void>} A promise representing the asynchronous operation.
+ * @returns {Promise<express.Response<any, Record<string, any>>>} A promise representing the asynchronous operation.
  */
 export async function GetUsers(req, res) {
   try {

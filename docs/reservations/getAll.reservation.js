@@ -54,21 +54,23 @@ const parameters = [
 const example = [
   {
     id: 1,
-    reserve_end_on: "2024-03-23",
-    is_expired: "false",
-    user_id: "3",
-    book_id: "2",
-    createdAt: "2024-03-23 14:06:51",
-    updatedAt: "2024-03-23 14:06:51",
-  },
-  {
-    id: 2,
-    reserve_end_on: "2024-03-23",
-    is_expired: "false",
-    user_id: "1",
-    book_id: "2",
-    createdAt: "2024-03-23 14:06:51",
-    updatedAt: "2024-03-23 14:06:51",
+    reserve_end_on: "2024-03-25T00:00:00.000Z",
+    createdAt: "2024-03-24T00:43:47.000Z",
+    updatedAt: "2024-03-24T00:43:47.000Z",
+    user: {
+      id: 1,
+      fullName: "Yousif ahmed",
+      email: "yousif@email.com",
+      role: "admin",
+    },
+    book: {
+      book_id: 1,
+      name: "Book Title Small Plastic Shoes",
+      description:
+        "Voluptatem labore quibusdam quasi sit aperiam eius ullam. Id laudantium provident enim porro repudiandae blanditiis laborum alias dolor. Illum unde id quos eum. Cupiditate fugit aut doloremque explicabo laudantium et. Inventore molestiae numquam quae et rerum. Id explicabo animi iure quae quas nihil nihil temporibus dolorem.",
+      createdAt: "2024-03-24T00:38:55.000Z",
+      updatedAt: "2024-03-24T00:38:55.000Z",
+    },
   },
 ];
 
