@@ -62,6 +62,9 @@ const responses = {
       },
     },
   },
+  401: {
+    description: "Unauthorized. Invalid credentials provided.",
+  },
   500: {
     description: "Internal server error. Failed to process the request.",
   },

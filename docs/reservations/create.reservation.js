@@ -1,7 +1,7 @@
 import swaggerJSDoc from "swagger-jsdoc";
 
 const requestBody = {
-  description: "Book object to be created",
+  description: "Reservation object to be created",
   content: {
     "application/json": {
       schema: {
@@ -24,13 +24,12 @@ const requestBody = {
 
 const responses = {
   201: {
-    description: "Book created successfully",
+    description: "Reservation created successfully",
     content: {
       "application/json": {
         example: {
           id: 1,
           reserve_end_on: "2019-05-17T00:00:00.000Z",
-          is_expired: false,
           createdAt: "2024-03-23T18:05:26.000Z",
           updatedAt: "2024-03-23T18:05:26.000Z",
           user_id: 1,
@@ -41,6 +40,9 @@ const responses = {
   },
   400: {
     description: "Bad request",
+  },
+  401: {
+    description: "Unauthorized. Invalid credentials provided.",
   },
   500: {
     description: "Internal server error. Failed to process the request.",

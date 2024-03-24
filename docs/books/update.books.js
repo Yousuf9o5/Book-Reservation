@@ -53,10 +53,13 @@ const responses = {
     },
   },
   304: {
-    description: "No Fields Where Entered",
+    description: "No Fields were Entered",
   },
   400: {
     description: "Bad Request: You must enter the ID of the book.",
+  },
+  401: {
+    description: "Unauthorized. Invalid credentials provided.",
   },
   500: {
     description: "Internal server error. Failed to process the request.",

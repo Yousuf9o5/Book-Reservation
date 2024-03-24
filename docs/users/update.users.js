@@ -46,7 +46,7 @@ const requestBody = {
 
 const responses = {
   201: {
-    description: "Book created successfully",
+    description: "User updated successfully",
     content: {
       "application/json": {
         example: {
@@ -61,6 +61,9 @@ const responses = {
   },
   400: {
     description: "Bad request",
+  },
+  401: {
+    description: "Unauthorized. Invalid credentials provided.",
   },
   500: {
     description: "Internal server error. Failed to process the request.",

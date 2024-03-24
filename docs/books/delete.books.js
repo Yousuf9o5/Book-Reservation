@@ -16,6 +16,9 @@ const responses = {
   204: {
     description: "Book Deleted successfully",
   },
+  401: {
+    description: "Unauthorized. Invalid credentials provided.",
+  },
   404: {
     description: "Book not founded",
   },
