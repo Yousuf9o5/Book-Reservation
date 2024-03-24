@@ -93,7 +93,10 @@ export async function ReserveBook(req, res) {
       return res.status(404).json(error(404, "User Not Found"));
     }
 
-    const isExists = await GetReservationByFieldsService({ book_id });
+    const isExists = await GetReservationByFieldsService({
+      book_id,
+      user_id: id,
+    });
     if (isExists) {
       return res.status(400).json(error(400, "Book Already Reserved"));
     }
@@ -112,6 +115,7 @@ export async function ReserveBook(req, res) {
 
     return res.status(200).json(success(200, reservation, "Done"));
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }

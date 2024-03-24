@@ -4,6 +4,10 @@ import {
   GetBooksService,
   UpdateBookService,
 } from "../service/book.service.js";
+import {
+  GetReservationByFieldsService,
+  GetReservationsService,
+} from "../service/reservation.service.js";
 import { error, success } from "../utils/response.js";
 import express from "express";
 
@@ -124,10 +128,19 @@ export async function DeleteBookById(req, res) {
       return res.status(404).json(error(404, book, "Not Found"));
     }
 
+    const { reservations } = await GetReservationsService({
+      search: { bookId: book.book_id },
+    });
+
+    reservations.forEach(async (reservation) => {
+      await reservation.destroy();
+    });
+
     await book.destroy();
 
     return res.status(200).json(success(204, {}, "Book Deleted Successfully"));
   } catch (err) {
+    console.log(err);
     return res.status(500).json(error(500, "Server Side Error", null));
   }
 }

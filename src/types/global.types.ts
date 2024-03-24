@@ -30,7 +30,6 @@ declare type BookAttributes = {
 declare type ReservationAttributes = {
   id: number;
   reserve_end_on: string;
-  is_expired: boolean;
   user_id: number;
   book_id: number;
   createdAt: string;

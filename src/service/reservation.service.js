@@ -7,7 +7,7 @@ import Book from "../../database/schemas/book.schema.js";
  * Retrieves paginated list of reservations.
  * @param {ReservationsOptions} options - Options for pagination (limit, offset).
  * @param {string} search - Search string to filter reservations by name or description.
- * @returns {Promise<{ reservations: ReservationAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of reservations and total pages.
+ * @returns {Promise<{ reservations: sequelize.Model<ReservationAttributes>[], totalPages: number }>} A promise that resolves to an object containing the list of reservations and total pages.
  * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetReservationsService(options) {
@@ -40,9 +40,13 @@ export async function GetReservationsService(options) {
 
     const attributes = { exclude: ["book_id", "user_id"] };
 
+    if (!limit) {
+      var countAll = await Reservation.count();
+    }
+
     const { count, rows: reservations } = await Reservation.findAndCountAll({
-      limit: limit,
-      offset: offset - 1,
+      limit: limit || countAll,
+      offset: offset - 1 || null,
       where,
       include,
       attributes,
@@ -74,14 +78,21 @@ export async function GetReservationService(id) {
 
 /**
  * Retrieves a reservation by its ID.
- * @param {ReservationAttributes} fields - The ID of the reservation to retrieve.
+ * @param {ReservationAttributes} fields - The fields of the reservation to retrieve.
+ * @param {boolean} expired - A boolean value for selecting the data is expired or not.
  * @returns {Promise<sequelize.Model<ReservationAttributes> | null>} A promise that resolves to the reservation object if found, or null otherwise.
  * @throws {Error} Throws an error if the retrieval process fails.
  */
-export async function GetReservationByFieldsService(fields) {
+export async function GetReservationByFieldsService(fields, expired) {
   try {
+    const where = { ...fields };
+
+    if (!expired) {
+      where["reserve_end_on"] = { [Op.lt]: new Date() };
+    }
+
     const reservation = await Reservation.findOne({
-      where: { ...fields, reserve_end_on: { [Op.lt]: new Date() } },
+      where: { ...fields },
       include: [
         { model: User, as: "user" },
         { model: Book, as: "book" },
