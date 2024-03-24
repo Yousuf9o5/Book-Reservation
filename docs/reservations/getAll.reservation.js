@@ -47,7 +47,7 @@ const parameters = [
       type: "string",
       enum: ["expired", "not expired"],
     },
-    description: "chose show type",
+    description: "chose reserve type",
   },
 ];
 
