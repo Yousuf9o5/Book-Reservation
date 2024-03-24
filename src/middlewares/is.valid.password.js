@@ -15,6 +15,10 @@ async function isValidPassword(req, res, next) {
       ? req.body.password
       : req.body.newPassword;
 
+    if (!password) {
+      return res.status(403).json(error(403, "Invalid password format"));
+    }
+
     const isValidPass = password.match(passRegex);
 
     if (!isValidPass) {

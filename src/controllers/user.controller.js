@@ -95,10 +95,16 @@ export async function CreateUser(req, res) {
 export async function UpdateUserById(req, res) {
   try {
     const id = req.params.id;
+    const { fullName, email, password, role } = req.body;
 
     if (!id) {
       const msg = "You Must Enter Id of the User";
       return res.status(400).json(error(400, msg, null));
+    }
+
+    if (!fullName || !email || !password || !role) {
+      const msg = "Please check your inputs before submitting";
+      return res.status(400).json(error(400, msg));
     }
 
     const isExists = await GetUserByFieldsService({
