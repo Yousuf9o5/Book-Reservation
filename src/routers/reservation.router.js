@@ -10,11 +10,7 @@ import isAdmin from "../middlewares/is.admin.js";
 const ReservationRouter = Router();
 
 ReservationRouter.get("/", [checkToken, isAdmin], GetReservation);
-ReservationRouter.get(
-  "/my_reservations",
-  [checkToken, isAdmin],
-  GetMyReservation
-);
+ReservationRouter.get("/my_reservations", checkToken, GetMyReservation);
 ReservationRouter.post("/create", checkToken, ReserveBook);
 
 export default ReservationRouter;
