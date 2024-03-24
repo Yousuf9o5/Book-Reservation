@@ -84,7 +84,7 @@ export async function ReserveBook(req, res) {
 
     if (!isValidDate(reserveEndDat)) {
       const msg =
-        "Invalid date please enter a valid date or invalid date formate(YYYY/MM/DD).";
+        "Invalid date please enter a valid date or invalid date Required: (YYYY-MM-DD).";
       return res.status(400).json(error(400, msg));
     }
 
