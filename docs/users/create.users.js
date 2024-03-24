@@ -25,7 +25,7 @@ const requestBody = {
             example: "user",
           },
         },
-        required: ["name", "description"],
+        required: ["fullName", "email", "password", "role"],
       },
     },
   },
