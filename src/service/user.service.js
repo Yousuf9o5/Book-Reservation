@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
  * Retrieves paginated list of users.
  * @param {GetOptions} options - Options for pagination (limit, offset).
  * @returns {Promise<{ users: UserAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of users and total pages.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetUsersService({ limit, offset, search }) {
   try {
@@ -34,6 +35,7 @@ export async function GetUsersService({ limit, offset, search }) {
  * Retrieves a user by their ID.
  * @param {number | string} id - The ID of the user to retrieve.
  * @returns {Promise<sequelize.Model<UserAttributes> | null>} A promise that resolves to the user object if found, or null otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetUserByIdService(id) {
   try {
@@ -65,6 +67,7 @@ export async function GetUserByFieldsService(fields) {
  * Creates a new user.
  * @param {Object} userData - Data of the user to be created (fullName, email, password, role).
  * @returns {Promise<sequelize.Model<UserAttributes>>} A promise that resolves to the created user object.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function CreateUserService(userData) {
   try {
@@ -81,6 +84,7 @@ export async function CreateUserService(userData) {
  * @param {number} id - The ID of the user to update.
  * @param {Object} newData - New data to update the user with (fullName, email, password, role).
  * @returns {Promise<sequelize.Model<UserAttributes>>} A promise that resolves to the updated user object if found, or null otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function UpdateUserByIdService(id, newData) {
   try {
@@ -114,6 +118,7 @@ export async function UpdateUserByIdService(id, newData) {
  * Deletes a user by their ID.
  * @param {number} id - The ID of the user to delete.
  * @returns {Promise<boolean>} A promise that resolves to true if the user is deleted successfully, or false otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function DeleteUserByIdService(id) {
   try {

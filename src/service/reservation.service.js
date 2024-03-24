@@ -8,6 +8,7 @@ import Book from "../../database/schemas/book.schema.js";
  * @param {ReservationsOptions} options - Options for pagination (limit, offset).
  * @param {string} search - Search string to filter reservations by name or description.
  * @returns {Promise<{ reservations: ReservationAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of reservations and total pages.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetReservationsService(options) {
   try {
@@ -59,6 +60,7 @@ export async function GetReservationsService(options) {
  * Retrieves a reservation by its ID.
  * @param {number | string} id - The ID of the reservation to retrieve.
  * @returns {Promise<sequelize.Model<ReservationAttributes> | null>} A promise that resolves to the reservation object if found, or null otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetReservationService(id) {
   try {
@@ -74,6 +76,7 @@ export async function GetReservationService(id) {
  * Retrieves a reservation by its ID.
  * @param {ReservationAttributes} fields - The ID of the reservation to retrieve.
  * @returns {Promise<sequelize.Model<ReservationAttributes> | null>} A promise that resolves to the reservation object if found, or null otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetReservationByFieldsService(fields) {
   try {
@@ -95,6 +98,7 @@ export async function GetReservationByFieldsService(fields) {
  * Creates a new reservation.
  * @param {Object} data - Data of the reservation to be created (reserve_end_on, User, Book).
  * @returns {Promise<sequelize.Model<ReservationAttributes>>} A promise that resolves to the created reservation object.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function CreateReservationService({ reserve_end_on, User, Book }) {
   try {
@@ -116,6 +120,7 @@ export async function CreateReservationService({ reserve_end_on, User, Book }) {
  * @param {number} id - The ID of the reservation to update.
  * @param {Object} data - New data to update the reservation with (reserve_end_on).
  * @returns {Promise<sequelize.Model<ReservationAttributes>>} A promise that resolves to the updated reservation object.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function UpdateReservationService(id, newData) {
   try {
@@ -139,6 +144,7 @@ export async function UpdateReservationService(id, newData) {
  * Deletes a reservation by its ID.
  * @param {number} id - The ID of the reservation to delete.
  * @returns {Promise<boolean>} A promise that resolves to true if the reservation is deleted successfully, or false otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function DeleteReservationService(id) {
   try {

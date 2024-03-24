@@ -6,6 +6,7 @@ import sequelize from "sequelize";
  * Retrieves paginated list of books.
  * @param {GetOptions} options - Options for pagination (limit, offset).
  * @returns {Promise<{ books: BookAttributes[], totalPages: number }>} A promise that resolves to an object containing the list of books and total pages.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetBooksService({ limit, offset, search }) {
   try {
@@ -34,6 +35,7 @@ export async function GetBooksService({ limit, offset, search }) {
  * Retrieves a book by its ID.
  * @param {number | string} id - The ID of the book to retrieve.
  * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the book object if found, or null otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetBookService(id) {
   try {
@@ -47,6 +49,7 @@ export async function GetBookService(id) {
  * Retrieves a book based on the provided fields.
  * @param {BookAttributes} fields - The fields to match when retrieving the book.
  * @returns {Promise<BookAttributes | null>} A promise that resolves to the book object if found, or null otherwise.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function GetBookByFieldsService(fields) {
   try {
@@ -60,6 +63,7 @@ export async function GetBookByFieldsService(fields) {
  * Creates a new book.
  * @param {BookAttributes} data - Data of the book to be created (name, description).
  * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the created book object.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function CreateBookService({ name, description }) {
   try {
@@ -75,6 +79,7 @@ export async function CreateBookService({ name, description }) {
  * @param {number} id - The ID of the book to update.
  * @param {BookAttributes} data - New data to update the book with (name, description).
  * @returns {Promise<sequelize.Model<BookAttributes> | null>} A promise that resolves to the updated book object.
+ * @throws {Error} Throws an error if the retrieval process fails.
  */
 export async function UpdateBookService(id, newData) {
   try {
