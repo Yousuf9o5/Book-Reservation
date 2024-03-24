@@ -11,7 +11,7 @@ import checkToken from "../middlewares/check.token.js";
 
 const BookRouter = Router();
 
-BookRouter.get("/", GetBooks);
+BookRouter.get("/", checkToken, GetBooks);
 BookRouter.get("/:id", checkToken, GetBookById);
 BookRouter.post("/create", [checkToken, isAdmin], CreateBook);
 BookRouter.put("/update/:id", [checkToken, isAdmin], UpdateBookById);
