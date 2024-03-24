@@ -10,7 +10,7 @@ const parameters = [
       default: 1,
       minimum: 1,
     },
-    description: "Offset for pagination (number of items to skip)",
+    description: "Page number",
   },
   {
     in: "query",
