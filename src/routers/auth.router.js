@@ -10,7 +10,7 @@ import isValidPassword from "../middlewares/is.valid.password.js";
 const AuthRouter = Router();
 
 AuthRouter.post("/signin", Signin);
-AuthRouter.post("/signup", Signup);
+AuthRouter.post("/signup", isValidPassword, Signup);
 AuthRouter.put(
   "/change_password",
   [checkToken, isValidPassword],
