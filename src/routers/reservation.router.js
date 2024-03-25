@@ -11,6 +11,6 @@ const ReservationRouter = Router();
 
 ReservationRouter.get("/", [checkToken, isAdmin], GetReservation);
 ReservationRouter.get("/my_reservations", checkToken, GetMyReservation);
-ReservationRouter.post("/create", checkToken, ReserveBook);
+ReservationRouter.post("/create", [checkToken, isAdmin], ReserveBook);
 
 export default ReservationRouter;

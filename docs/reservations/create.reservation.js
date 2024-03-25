@@ -7,6 +7,9 @@ const requestBody = {
       schema: {
         type: "object",
         properties: {
+          user_id: {
+            type: "string",
+          },
           book_id: {
             type: "string",
           },

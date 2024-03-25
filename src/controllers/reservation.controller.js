@@ -73,8 +73,7 @@ export async function GetMyReservation(req, res) {
  */
 export async function ReserveBook(req, res) {
   try {
-    const id = req.userId;
-    const { book_id } = req.body;
+    const { book_id, user_id } = req.body;
     const reserveEndDat = req.body.date_reserve_end;
 
     if (!book_id) {
@@ -88,14 +87,14 @@ export async function ReserveBook(req, res) {
       return res.status(400).json(error(400, msg));
     }
 
-    const user = await GetUserByIdService(id);
+    const user = await GetUserByIdService(user_id);
     if (!user) {
       return res.status(404).json(error(404, "User Not Found"));
     }
 
     const isExists = await GetReservationByFieldsService({
       book_id,
-      user_id: id,
+      user_id,
     });
     if (isExists) {
       return res.status(400).json(error(400, "Book Already Reserved"));
