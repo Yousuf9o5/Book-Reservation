@@ -1,7 +1,7 @@
 export const adminData = {
   fullName: "Yousif ahmed",
   email: "yousif@email.com",
-  password: "9351151945",
+  password: "12345678Aa",
   role: "admin",
 };
 
