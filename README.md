@@ -62,7 +62,7 @@ The seeding process will add the following admin and user data to the database:
 export const adminData = {
   fullName: "Yousif Ahmed",
   email: "yousif@email.com",
-  password: "9351151945",
+  password: "12345678Aa",
   role: "admin",
 };
 
